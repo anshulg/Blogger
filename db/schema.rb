@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110222043328) do
+ActiveRecord::Schema.define(:version => 20110222044858) do
 
   create_table "blogposts", :force => true do |t|
     t.string   "title"
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.decimal  "average_rating"
   end
 
   create_table "ratings", :force => true do |t|
