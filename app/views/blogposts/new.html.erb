@@ -1,0 +1,28 @@
+<h1>New Blog Entry</h1>
+
+<%= form_for(@blogpost) do |f| %>
+<% if @blogpost.errors.any? %>
+  <div >
+    <h2><%= pluralize(@blogpost.errors.count, "error") %> 
+        Error saving the post:</h2>
+    <p>There were problems with the following fields:</p>
+    <ul>
+    <% @blogpost.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
