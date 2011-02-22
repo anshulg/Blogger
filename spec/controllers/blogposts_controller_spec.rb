@@ -163,7 +163,7 @@ describe BlogpostsController do
     
     it "should allow to rate Blogpost" do
       lambda do
-        post :rate, :blogpost => @blogpost , :score => 2
+        post :rate, :id => @blogpost.id , :score => 2
       end.should change(Rating, :count).by(1)
     end
   end

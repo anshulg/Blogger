@@ -1,1 +1,3 @@
-<%= render :partial => "blogpost", :locals => { :blogpost => @blogpost } %>
+<%= render :partial => "blogpost", :locals => { :blogpost => @blogpost } %><br>
+<%= link_to "Edit Post", :controller => "blogposts", :action => "edit" %><br>
+<%= link_to "Back", :controller => "blogposts", :action => "index" %>

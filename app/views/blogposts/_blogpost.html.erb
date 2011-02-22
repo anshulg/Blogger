@@ -1,5 +1,7 @@
-<span><%= blogpost.title %></span>
+<span><%= link_to blogpost.title, blogpost %></span>
 	<br>
+<span><%= blogpost.modified_at.strftime("Last edited on %m/%d/%Y")  %></span>
+	<br><br>
 <span><%= blogpost.content %></span>
-	<br>
+	<br><br>
 <%= render :partial => "rating", :locals => { :blogpost => blogpost } %>
