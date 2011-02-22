@@ -8,7 +8,28 @@ describe Blogpost do
   it "should create a new instance given valid attributes" do
     Blogpost.create!(@attr)
   end
+  
+  it "should set modification time" do
+    @blogpost = Blogpost.create!(@attr)
+    @blogpost.modified_at.should_not be_nil
+  end
 
+  it "should update modification time on title change" do
+    @blogpost = Blogpost.create!(@attr)
+    @blogpost.title = "New Title"
+    lambda do
+      @blogpost.save 
+    end.should change(@blogpost,:modified_at)
+  end
+
+  it "should update modification time on content change" do
+    @blogpost = Blogpost.create!(@attr)
+    @blogpost.content = "New Content"
+    lambda do
+      @blogpost.save 
+    end.should change(@blogpost,:modified_at)
+  end
+  
   it "should require a title" do
     no_title_blogpost = Blogpost.new(@attr.merge(:title => ""))
     no_title_blogpost.should_not be_valid
@@ -42,7 +63,7 @@ describe Blogpost do
       @blogpost.save
     end
     
-    it "should return average rating" do
+    it "should return average score" do
       @blogpost.ratings.build(:score => 5).save
       @blogpost.ratings.build(:score => 3).save
       @blogpost.ratings.build(:score => 1).save
@@ -50,6 +71,11 @@ describe Blogpost do
       @blogpost.average_rating.should == 3
     end
     
+    it "should not update modified timestamp" do      
+      lambda do
+        @blogpost.ratings.build(:score => 5).save 
+      end.should_not change(@blogpost,:modified_at)
+    end
     
   end  
   
