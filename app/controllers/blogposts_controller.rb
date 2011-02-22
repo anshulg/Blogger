@@ -33,4 +33,10 @@ class BlogpostsController < ApplicationController
     end
   end
   
+  def rate
+    @blogpost = Blogpost.find(params[:id])
+    @blogpost.ratings.build(:score => params[:score])
+    @blogpost.save
+    redirect_to @blogpost
+  end
 end

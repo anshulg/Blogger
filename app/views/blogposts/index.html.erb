@@ -3,12 +3,9 @@
 <ul>
   <% @blogposts.each do |blogpost| %>
     <li>
-      <span><%= blogpost.title %></span>
-		<br>
-	  <span><%= blogpost.average_rating %></span>
-		<br>
-      <span><%= blogpost.content %></span>
+		<%= render :partial => "blogpost", :locals => { :blogpost => blogpost } %>
     </li>
+	<br>
 	<br>
   <% end %>
 </ul>

@@ -48,7 +48,7 @@ describe BlogpostsController do
       end
     end
     
-    it "should have ratings for each post" do
+    it "should have average ratings for each post" do
 
       @blogposts.each do |blogpost|
         Factory(:rating, :blogpost => blogpost, :score => 1 + rand(5))
@@ -154,4 +154,18 @@ describe BlogpostsController do
         end
       end
   end
+
+  describe "POST 'rate'" do
+    
+    before(:each) do
+       @blogpost = Factory(:blogpost)
+    end
+    
+    it "should allow to rate Blogpost" do
+      lambda do
+        post :rate, :blogpost => @blogpost , :score => 2
+      end.should change(Rating, :count).by(1)
+    end
+  end
+
 end

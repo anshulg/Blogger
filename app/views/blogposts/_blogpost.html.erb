@@ -1,0 +1,5 @@
+<span><%= blogpost.title %></span>
+	<br>
+<span><%= blogpost.content %></span>
+	<br>
+<%= render :partial => "rating", :locals => { :blogpost => blogpost } %>

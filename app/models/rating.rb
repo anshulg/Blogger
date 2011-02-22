@@ -15,7 +15,7 @@ class Rating < ActiveRecord::Base
   
   def calculate_average_rating
     average_rating = Rating.average(:score, :conditions => [ 'blogpost_id = ?', blogpost_id ] )
-    blogpost = Blogpost.find(:first, blogpost_id)
+    blogpost = Blogpost.find_by_id(blogpost_id)
     blogpost.average_rating = average_rating
     blogpost.save
   end
