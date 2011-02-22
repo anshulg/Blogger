@@ -4,4 +4,5 @@ class Blogpost < ActiveRecord::Base
                     :uniqueness => true
   validates :content, :presence => true
   
+  has_many :ratings
 end
