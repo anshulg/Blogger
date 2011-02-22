@@ -48,6 +48,20 @@ describe BlogpostsController do
       end
     end
     
+    it "should have ratings for each post" do
+
+      @blogposts.each do |blogpost|
+        Factory(:rating, :blogpost => blogpost, :score => 1 + rand(5))
+        Factory(:rating, :blogpost => blogpost, :score => 1 + rand(5))
+        blogpost.save
+      end
+      
+      get :index
+      @blogposts.each do |blogpost|
+        response.should have_selector("span", :content => blogpost.average_rating)
+      end
+    end
+    
   end
 
   describe "POST 'create'" do
