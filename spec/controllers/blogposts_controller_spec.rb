@@ -50,4 +50,94 @@ describe BlogpostsController do
     
   end
 
+  describe "POST 'create'" do
+
+      describe "failure" do
+
+        before(:each) do
+          @attr = { :title => "", :content => ""}
+        end
+
+        it "should not create a blogpost" do
+          lambda do
+            post :create, :blogpost => @attr
+          end.should_not change(Blogpost, :count)
+        end
+
+        it "should render the 'new' page" do
+          post :create, :blogpost => @attr
+          response.should render_template('new')
+        end
+      end
+      
+      describe "success" do
+        
+        before(:each) do
+          @attr = { :title => "New Post", :content => "Praesent ut purus eu sapien vestibulum accumsan"}
+        end
+        
+        it "should create a blogpost" do
+          lambda do
+            post :create, :blogpost => @attr
+          end.should change(Blogpost, :count).by(1)
+        end
+        
+        it "should render show blogpost page" do
+          post :create, :blogpost => @attr
+          response.should redirect_to(blogpost_path(assigns(:blogpost)))
+        end
+        
+      end
+      
+  end
+
+  describe "GET 'edit'" do
+
+      before(:each) do
+        @blogpost = Factory(:blogpost)
+      end
+
+      it "should be successful" do
+        get :edit, :id => @blogpost
+        response.should be_success
+      end
+  end
+  
+  describe "PUT 'update'" do
+
+      before(:each) do
+        @blogpost = Factory(:blogpost)
+      end
+
+      describe "failure" do
+
+        before(:each) do
+          @attr = { :title => "", :content => "" }
+        end
+
+        it "should render the 'edit' page" do
+          put :update, :id => @blogpost, :blogpost => @attr
+          response.should render_template('edit')
+        end
+      end
+
+      describe "success" do
+
+        before(:each) do
+          @attr = { :title => "New title for Blogpost", :content => "Aliquam et sapien est. Ut ac quam ante. Donec commodo placerat magna" }
+        end
+
+        it "should update the blogpost" do
+          put :update, :id => @blogpost, :blogpost => @attr
+          @blogpost.reload
+          @blogpost.title.should  == @attr[:title]
+          @blogpost.content.should == @attr[:content]
+        end
+
+        it "should redirect to the blogpost show page" do
+          put :update, :id => @blogpost, :blogpost => @attr
+          response.should redirect_to(blogpost_path(@blogpost))
+        end
+      end
+  end
 end
