@@ -4,7 +4,7 @@ class BlogpostsController < ApplicationController
   end
 
   def index
-    @blogposts = Blogpost.all
+    @blogposts = Blogpost.all(:order => "created_at DESC")
   end
   
   def show
@@ -36,9 +36,10 @@ class BlogpostsController < ApplicationController
   def rate
     @blogpost = Blogpost.find(params[:id])
     @blogpost.ratings.build(:score => params[:score]).save
+    flash[:notice] = "Thanks for rating!"
     @blogpost.reload
     respond_to do |format|
-      format.html { redirect_to @blogpost }
+      format.html { redirect_to @blogpost } #Fix this - Should redirect to request origin
       format.js
     end  end
 end

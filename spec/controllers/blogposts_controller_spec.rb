@@ -49,7 +49,6 @@ describe BlogpostsController do
     end
     
     it "should have average ratings for each post" do
-
       @blogposts.each do |blogpost|
         Factory(:rating, :blogpost => blogpost, :score => 1 + rand(5))
         Factory(:rating, :blogpost => blogpost, :score => 1 + rand(5))
@@ -60,6 +59,12 @@ describe BlogpostsController do
       @blogposts.each do |blogpost|
         response.should have_selector("span", :content => blogpost.average_rating)
       end
+    end
+    
+    it "should sort blogpost in descending order of creation" do
+      get :index
+      #assigns(:blogposts)[0].should == @blogposts[0]
+      assigns(:blogposts).to_a.should == @blogposts.reverse.to_a
     end
     
   end
