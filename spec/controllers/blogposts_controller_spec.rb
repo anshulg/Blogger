@@ -166,6 +166,13 @@ describe BlogpostsController do
         post :rate, :id => @blogpost.id , :score => 2
       end.should change(Rating, :count).by(1)
     end
+    
+    it "should allow to rate Blogpost using ajax" do
+      lambda do
+        xhr :post, :rate, :id => @blogpost.id , :score => 2
+        response.should be_success
+      end.should change(Rating, :count).by(1)
+    end
   end
 
 end

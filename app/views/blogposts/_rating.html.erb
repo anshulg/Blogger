@@ -1,5 +1,5 @@
-<%= form_for blogpost, :url => { :controller => "blogposts", :action => "rate", :id => blogpost.id , :remote=> true } do |f| %>
-<span>Current Rating: <%= blogpost.average_rating %></span><br><br>
+<%= form_for blogpost, :url => { :controller => "blogposts", :action => "rate", :id => blogpost.id }, :remote => true  do |f| %>
+<span>Current Rating: <span id="average_rating_<%= blogpost.id%>"><%=blogpost.average_rating%></span></span><br><br>
 <span><%= select_tag :score, options_for_select([ "5", "4", "3", "2", "1" ],"5")  -%> </span>
 <%= f.submit 'Rate' %>
 <% end %>
