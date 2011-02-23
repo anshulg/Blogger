@@ -1,13 +1,10 @@
-<h1>My Blog Posts</h1>
-<%= link_to "Create new blog entry", :controller => "blogposts", :action => "new" %>
-
 <ul>
   <% @blogposts.each do |blogpost| %>
     <li>
 		<%= render :partial => "blogpost", :locals => { :blogpost => blogpost } %>
     </li>
 	<br>
-	<br>
+	<hr>
   <% end %>
 </ul>
 
