@@ -45,6 +45,11 @@ header h1 a:visited {
 	text-decoration: none;
 }
 
+header h1 a:hover {
+  	color: #000000;
+	text-decoration: none;
+}
+
 ul {
     list-style-type: none;
 }
