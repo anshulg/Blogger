@@ -8,8 +8,12 @@ class Blogpost < ActiveRecord::Base
   
   before_save :set_modified_timestamp
   
-  def average_rating
-    number_with_precision(read_attribute(:average_rating), :precision => 1)
+#  def average_rating
+#    number_with_precision(read_attribute(:average_rating), :precision => 1)
+#  end
+  
+  def count_of_ratings
+    self.ratings.count
   end
   
   private 

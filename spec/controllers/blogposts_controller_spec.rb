@@ -63,7 +63,6 @@ describe BlogpostsController do
     
     it "should sort blogpost in descending order of creation" do
       get :index
-      #assigns(:blogposts)[0].should == @blogposts[0]
       assigns(:blogposts).to_a.should == @blogposts.reverse.to_a
     end
     

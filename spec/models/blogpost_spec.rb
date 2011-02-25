@@ -62,21 +62,13 @@ describe Blogpost do
       @blogpost = Blogpost.new(@attr)
       @blogpost.save
     end
-    
-    it "should round of average rating" do
-      @blogpost.ratings.build(:score => 5).save
-      @blogpost.ratings.build(:score => 3).save
-      @blogpost.ratings.build(:score => 2).save
-      @blogpost = Blogpost.find_by_id(@blogpost.id)
-      @blogpost.average_rating.should == "3.3"
-    end
-    
+        
     it "should return average rating" do
       @blogpost.ratings.build(:score => 5).save
       @blogpost.ratings.build(:score => 3).save
       @blogpost.ratings.build(:score => 1).save
       @blogpost = Blogpost.find_by_id(@blogpost.id)
-      @blogpost.average_rating.should == "3.0"
+      @blogpost.average_rating.should == 3.0
     end
     
     it "should not update modified timestamp" do      
@@ -86,5 +78,20 @@ describe Blogpost do
     end
     
   end  
+  
+  describe "count of ratings" do
+    before(:each) do
+      @blogpost = Blogpost.new(@attr)
+      @blogpost.save
+    end
+    
+    it"should return count of ratings" do
+      @blogpost.ratings.build(:score => 5).save
+      @blogpost.ratings.build(:score => 3).save
+      @blogpost.ratings.build(:score => 1).save
+      
+      @blogpost.count_of_ratings.should == 3
+    end
+  end
   
 end

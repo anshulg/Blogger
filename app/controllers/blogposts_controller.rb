@@ -41,5 +41,10 @@ class BlogpostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @blogpost } #Fix this - Should redirect to request origin
       format.js
-    end  end
+    end  
+  end
+
+  def number_of_ratings
+    return Blogpost.find(params[:id]).ratings.count
+  end
 end

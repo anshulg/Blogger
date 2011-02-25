@@ -2,15 +2,16 @@
 <span>
 	<h6>Current Rating:</h6>
 	<span id="average_rating_<%= blogpost.id%>">
-		<%=blogpost.average_rating ||= "Unrated. Be the first to rate!"%>
+		<%= format_average_rating blogpost.average_rating %>
+	</span>
+	<span id="count_rating_<%= blogpost.id%>">
+		<%= format_count_of_ratings blogpost.count_of_ratings %>
 	</span>
 </span>
 <br>
 <span>
 	<%= select_tag :score, options_for_select([ "5", "4", "3", "2", "1" ],"5")  -%>
 </span>
-&nbsp;
 <%= f.submit 'Rate' %>
-&nbsp;
 <span id='rating_success_<%= blogpost.id%>'></span>
 <% end %>

@@ -1,3 +1,4 @@
 $("#rating_success_<%=@blogpost.id %>").html('<span class="flash success"><%= escape_javascript(flash.delete(:success)) %></span>')
-$("#average_rating_<%=@blogpost.id %>").text("<%=@blogpost.average_rating%>");
+$("#average_rating_<%=@blogpost.id %>").text("<%= format_average_rating @blogpost.average_rating %>");
+$("#count_rating_<%=@blogpost.id %>").text("<%= format_count_of_ratings @blogpost.count_of_ratings %>");
 $(".flash.success").fadeOut(2000);
