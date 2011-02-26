@@ -70,6 +70,10 @@ a:visited {
   color: #399200;
 }
 
+.error, .alert, .notice, .success, .info {
+    padding: 0.1em 0.4em 0.2em;
+}
+
 nav {
   float: right;
 }
