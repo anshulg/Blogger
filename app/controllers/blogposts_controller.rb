@@ -39,7 +39,7 @@ class BlogpostsController < ApplicationController
     flash[:success] = "Thanks for rating!"
     @blogpost.reload
     respond_to do |format|
-      format.html { redirect_to @blogpost } #Fix this - Should redirect to request origin
+      format.html { redirect_to @blogpost } #FIXME - Should redirect to request origin
       format.js
     end  
   end
